@@ -129,5 +129,49 @@ namespace UniversitetSystem.Models.Library
                 Console.WriteLine("*-------------------------*");
             }
         }
+
+        public static void PrintLoanHistory()
+        {
+            if (!_loans.Any())
+            {
+                Console.WriteLine("No loan history.");
+                return;
+            }
+
+            Console.WriteLine("Loan History:");
+            Console.WriteLine("*-------------------------*");
+
+            foreach (var loan in _loans)
+            {
+                Console.WriteLine($"Borrower: {loan.Borrower.Name} (ID: {loan.Borrower.ID})");
+                Console.WriteLine($"Item: {loan.Item.Title} by {loan.Item.Author}");
+                Console.WriteLine($"Loan Date: {loan.LoanDate:yyyy-MM-dd}");
+                Console.WriteLine($"Return Date: {(loan.ReturnDate.HasValue ? loan.ReturnDate.Value.ToString("yyyy-MM-dd") : "Not returned")}");
+                Console.WriteLine($"Status: {(loan.IsActive ? "Active" : "Returned")}");
+                Console.WriteLine("*-------------------------*");
+            }
+        }
+
+        public static void PrintActiveLoans()
+        {
+            var activeLoans = _loans.Where(l => l.IsActive).ToList();
+
+            if (!activeLoans.Any())
+            {
+                Console.WriteLine("No active loans.");
+                return;
+            }
+
+            Console.WriteLine("Active Loans:");
+            Console.WriteLine("*-------------------------*");
+
+            foreach (var loan in activeLoans)
+            {
+                Console.WriteLine($"Borrower: {loan.Borrower.Name} (ID: {loan.Borrower.ID})");
+                Console.WriteLine($"Item: {loan.Item.Title} by {loan.Item.Author}");
+                Console.WriteLine($"Loan Date: {loan.LoanDate:yyyy-MM-dd}");
+                Console.WriteLine("*-------------------------*");
+            }
+        }
     }
 }
