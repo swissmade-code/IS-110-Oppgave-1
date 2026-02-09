@@ -50,5 +50,84 @@ namespace UniversitetSystem.Models.Library
 
             return true;
         }
+
+        public static List<LibraryItem> Search(string query)
+        {
+            return _items.Where(l => l.Title.Contains(query, StringComparison.OrdinalIgnoreCase) || l.Author.Contains(query, StringComparison.OrdinalIgnoreCase)).ToList();
+        }
+
+        public static LibraryItem? SelectLibraryItem()
+        {
+            if (!_items.Any())
+            {
+                Console.WriteLine("No library items registered.");
+                return null;
+            }
+
+            Console.WriteLine("Select an library item:");
+            for (int i = 0; i < _items.Count; i++)
+            {
+                var l = _items[i];
+                Console.WriteLine($"[{i + 1}] {l.Title} (Author: {l.Author})");
+            }
+
+            Console.Write("Your choice: ");
+            if (int.TryParse(Console.ReadLine(), out int choice) &&
+                choice > 0 && choice <= _items.Count)
+            {
+                return _items[choice - 1];
+            }
+
+            Console.WriteLine("Invalid choice.");
+            return null;
+        }
+
+        public static Loan? SelectActiveLoan()
+        {
+            var activeLoans = _loans.Where(l => l.IsActive).ToList();
+
+            if (!activeLoans.Any())
+            {
+                Console.WriteLine("No active loans registered.");
+                return null;
+            }
+
+            Console.WriteLine("Select a loan to return:");
+            Console.WriteLine("*-------------------------*");
+
+            for (int i = 0; i < activeLoans.Count; i++)
+            {
+                var loan = activeLoans[i];
+                Console.WriteLine($"[{i + 1}] Borrower: {loan.Borrower.Name} | Item: {loan.Item.Title} ({loan.Item.Type}) | Loaned on: {loan.LoanDate:yyyy-MM-dd}");
+            }
+
+            Console.Write("Your choice: ");
+            if (int.TryParse(Console.ReadLine(), out int choice) &&
+                choice > 0 && choice <= activeLoans.Count)
+            {
+                return activeLoans[choice - 1];
+            }
+
+            Console.WriteLine("Invalid choice.");
+            return null;
+        }
+
+        public static void PrintAllLibraryItems()
+        {
+            if (!_items.Any())
+            {
+                Console.WriteLine("No library items registered.");
+                return;
+            }
+
+            Console.WriteLine("Library Items:");
+            Console.WriteLine("*-------------------------*");
+
+            foreach (var item in _items)
+            {
+                item.PrintDetails();
+                Console.WriteLine("*-------------------------*");
+            }
+        }
     }
 }

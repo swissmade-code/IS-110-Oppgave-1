@@ -45,6 +45,16 @@ namespace UniversitetSystem.Models.Library
 
             AvailableCopies++;
         }
-    }
 
+        public void PrintDetails()
+        {
+            Console.WriteLine($"ID: {Id}");
+            Console.WriteLine($"Title: {Title}");
+            Console.WriteLine($"Author: {Author}");
+            Console.WriteLine($"Year: {Year}");
+            Console.WriteLine($"Type: {Type}");
+            Console.WriteLine($"Available: {AvailableCopies}/{TotalCopies}");
+            Console.WriteLine(IsAvailable ? "Status: Available" : "Status: Not available");
+        }
+    }
 }

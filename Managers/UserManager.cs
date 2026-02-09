@@ -1,3 +1,4 @@
+using UniversitetSystem.Interfaces;
 using UniversitetSystem.Models;
 
 namespace UniversitetSystem.Managers
@@ -72,5 +73,32 @@ namespace UniversitetSystem.Managers
             return null;
         }
 
+        public static IBorrower? SelectBorrower()
+        {
+            var borrowers = _users.OfType<IBorrower>().ToList();
+
+            if (!borrowers.Any())
+            {
+                Console.WriteLine("No borrowers registered.");
+                return null;
+            }
+
+            Console.WriteLine("Select a borrower:");
+            for (int i = 0; i < borrowers.Count; i++)
+            {
+                var b = borrowers[i] as User;
+                Console.WriteLine($"[{i + 1}] {b!.Name} (ID: {b.ID})");
+            }
+
+            Console.Write("Your choice: ");
+            if (int.TryParse(Console.ReadLine(), out int choice) &&
+                choice > 0 && choice <= borrowers.Count)
+            {
+                return borrowers[choice - 1];
+            }
+
+            Console.WriteLine("Invalid choice.");
+            return null;
+        }
     }
 }

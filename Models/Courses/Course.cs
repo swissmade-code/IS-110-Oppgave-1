@@ -53,7 +53,7 @@ namespace UniversitetSystem.Models.Courses
             return true;
         }
 
-        public void PrintCourseDetails()
+        public void PrintDetails()
         {
             Console.WriteLine($"Course: {Code} - {Name} ({Credits} credits)");
             Console.WriteLine($"Max students: {MaxStudents}, Enrolled: {_enrolledStudents.Count}");

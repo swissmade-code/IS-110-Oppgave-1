@@ -20,14 +20,9 @@ namespace UniversitetSystem.Models.Courses
             return true;
         }
 
-        public static Course? FindByCode(string code)
+        public static List<Course> Search(string query)
         {
-            return _courses.FirstOrDefault(c => c.Code.Equals(code, StringComparison.OrdinalIgnoreCase));
-        }
-
-        public static List<Course> FindByName(string name)
-        {
-            return _courses.Where(c => c.Name.IndexOf(name, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            return _courses.Where(c => c.Code.Contains(query, StringComparison.OrdinalIgnoreCase) || c.Name.Contains(query, StringComparison.OrdinalIgnoreCase)).ToList();
         }
 
         public static Course? SelectCourse()
@@ -56,11 +51,17 @@ namespace UniversitetSystem.Models.Courses
             return null;
         }
 
-        public static void PrintAll_courses()
+        public static void PrintAllCourses()
         {
+            if (!_courses.Any())
+            {
+                Console.WriteLine("No courses registered.");
+                return;
+            }
+
             foreach (var course in _courses)
             {
-                course.PrintCourseDetails();
+                course.PrintDetails();
                 Console.WriteLine("*-------------------------*");
             }
         }
