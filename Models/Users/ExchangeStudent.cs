@@ -4,10 +4,10 @@ namespace UniversitetSystem.Models.Users
 {
     public class ExchangeStudent : Student
     {
-        public string HomeUniversity { get; set; }
-        public string Country { get; set; }
-        public DateTime From { get; set; }
-        public DateTime To { get; set; }
+        public string HomeUniversity { get; private set; }
+        public string Country { get; private set; }
+        public DateTime From { get; private set; }
+        public DateTime To { get; private set; }
 
         public ExchangeStudent(
             int id, string name, string email,

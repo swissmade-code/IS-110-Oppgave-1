@@ -4,10 +4,10 @@ namespace UniversitetSystem.Models.Courses
 {
     public class Course
     {
-        public string Code { get; set; }
-        public string Name { get; set; }
-        public int Credits { get; set; }
-        public int MaxStudents { get; set; }
+        public string Code { get; private set; }
+        public string Name { get; private set; }
+        public int Credits { get; private set; }
+        public int MaxStudents { get; private set; }
 
         private List<Student> _enrolledStudents = new List<Student>();
 
