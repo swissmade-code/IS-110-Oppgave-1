@@ -2,7 +2,7 @@
 
 namespace UniversitetSystem.Models.Courses
 {
-    public class CourseManager
+    public static class CourseManager
     {
         private static List<Course> _courses = new List<Course>();
 
