@@ -39,7 +39,7 @@ namespace UniversitetSystem.Domain.Repositories
 
         public int GetNextUserId()
         {
-            return Database.NextLibraryItemId();
+            return Database.NextUserId();
         }
     }
 }
