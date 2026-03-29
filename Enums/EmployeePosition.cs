@@ -7,6 +7,7 @@ namespace UniversitetSystem.Enums
         Administration,
         ITSupport,
         Counselor,
-        LabTechnician
+        LabTechnician,
+        Librarian,
     }
 }
