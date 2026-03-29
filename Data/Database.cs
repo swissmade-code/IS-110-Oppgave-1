@@ -4,7 +4,7 @@ using UniversitetSystem.Domain.Library;
 
 namespace UniversitetSystem.Data
 {
-    public class Database
+    public static class Database
     {
         public static List<User> Users { get; } = new();
         public static List<Course> Courses { get; } = new();
